@@ -4,6 +4,8 @@ export const site = {
   email: 'figen.yalcinkaya@gmail.com',
   phone: '+905342041853',
   phoneDisplay: '+90 534 204 18 53',
+  whatsapp: '905342041853',
+  whatsappUrl: 'https://wa.me/905342041853',
 };
 
 export const nav = [
