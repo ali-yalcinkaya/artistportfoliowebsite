@@ -16,6 +16,20 @@ display_url: https://barisfigenyalcinkaya.netlify.app
 logo_url: /favicon.svg
 
 collections:
+  - name: "settings"
+    label: "Ayarlar"
+    description: "Sanatçı profil fotoğrafı gibi genel ayarlar."
+    files:
+      - name: "about"
+        label: "Hakkımda — Profil Fotoğrafı"
+        file: "src/data/about.json"
+        fields:
+          - label: "Profil Fotoğrafı"
+            name: "photo"
+            widget: "image"
+            required: false
+            hint: "Hakkımda sayfasında görünecek portre fotoğrafınız. Yüklemek için tıklayın."
+
   - name: "artworks"
     label: "Eserler"
     label_singular: "Eser"

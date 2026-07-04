@@ -16,8 +16,13 @@ const year = new Date().getFullYear();
         <a href={`mailto:${site.email}`} class="link-underline mt-2 block text-parchment sm:ml-auto">
           {site.email}
         </a>
-        <a href={`tel:${site.phone}`} class="link-underline mt-1 block text-parchment sm:ml-auto">
-          {site.phoneDisplay}
+        <a
+          href={site.whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-underline mt-1 block text-parchment sm:ml-auto"
+        >
+          {site.phoneDisplay} · WhatsApp
         </a>
       </div>
     </div>
