@@ -1,0 +1,28 @@
+---
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-24 border-t border-line/70 bg-hunter-deep text-parchment">
+  <div class="mx-auto max-w-6xl px-6 py-14">
+    <div class="ornament mb-8 text-gold-soft"></div>
+    <div class="grid gap-10 sm:grid-cols-2">
+      <div>
+        <h3 class="font-[family-name:var(--font-display)] text-2xl text-parchment">{site.name}</h3>
+        <p class="mt-2 text-sm uppercase tracking-[0.28em] text-gold-soft">{site.role}</p>
+      </div>
+      <div class="sm:text-right">
+        <p class="text-sm tracking-wide text-parchment/80">İletişim</p>
+        <a href={`mailto:${site.email}`} class="link-underline mt-2 block text-parchment sm:ml-auto">
+          {site.email}
+        </a>
+        <a href={`tel:${site.phone}`} class="link-underline mt-1 block text-parchment sm:ml-auto">
+          {site.phoneDisplay}
+        </a>
+      </div>
+    </div>
+    <p class="mt-12 text-center text-xs tracking-wide text-parchment/50">
+      © {year} {site.name}. Tüm eserlerin hakları saklıdır.
+    </p>
+  </div>
+</footer>

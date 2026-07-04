@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="İletişim">
+  <section class="border-b border-line/70 bg-parchment-deep">
+    <div class="mx-auto max-w-6xl px-6 py-16 text-center">
+      <p class="eyebrow">İletişim</p>
+      <h1 class="mt-3 text-5xl">İletişim</h1>
+      <div class="ornament my-6"></div>
+      <p class="mx-auto max-w-xl text-ink-soft">
+        Eserler, sergiler ve iş birlikleri hakkında bilgi almak için sanatçıya
+        doğrudan ulaşabilirsiniz.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-20">
+    <div class="grid gap-6 sm:grid-cols-2">
+      <!-- E-posta -->
+      <a
+        href={`mailto:${site.email}`}
+        class="group flex flex-col items-center rounded-sm border border-line bg-white/70 px-6 py-10 text-center transition-colors hover:border-gold"
+      >
+        <span class="flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors group-hover:bg-gold group-hover:text-white">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="m3 7 9 6 9-6"></path>
+          </svg>
+        </span>
+        <span class="eyebrow mt-5">E-posta</span>
+        <span class="mt-2 text-lg text-hunter-deep">{site.email}</span>
+      </a>
+
+      <!-- Telefon -->
+      <a
+        href={`tel:${site.phone}`}
+        class="group flex flex-col items-center rounded-sm border border-line bg-white/70 px-6 py-10 text-center transition-colors hover:border-gold"
+      >
+        <span class="flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 text-gold transition-colors group-hover:bg-gold group-hover:text-white">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+        </span>
+        <span class="eyebrow mt-5">Telefon</span>
+        <span class="mt-2 text-lg text-hunter-deep">{site.phoneDisplay}</span>
+      </a>
+    </div>
+
+    <div class="ornament mt-16"></div>
+    <p class="mt-8 text-center font-[family-name:var(--font-display)] text-2xl text-hunter-deep">
+      {site.name}
+    </p>
+    <p class="mt-1 text-center text-sm uppercase tracking-[0.24em] text-gold">{site.role}</p>
+  </section>
+</BaseLayout>

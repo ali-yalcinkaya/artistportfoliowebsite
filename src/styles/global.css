@@ -1,0 +1,103 @@
+@import 'tailwindcss';
+
+/* ---------------------------------------------------------------------------
+   B. Figen Yalçınkaya — Tezhip & Minyatür Portfolyosu
+   Klasik Türk bezeme sanatlarından esinlenen renk paleti ve tipografi.
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* Renk paleti — parşömen, mürekkep, avlu yeşili ve altın */
+  --color-parchment: #f6f1e7;
+  --color-parchment-deep: #efe7d6;
+  --color-ink: #2a2622;
+  --color-ink-soft: #514a41;
+  --color-hunter: #1f3d2f;
+  --color-hunter-deep: #162c22;
+  --color-gold: #b0872f;
+  --color-gold-soft: #c9a24a;
+  --color-terra: #8a3a2b;
+  --color-line: #d9cdb5;
+
+  /* Tipografi */
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-parchment);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 1.075rem;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.15;
+    color: var(--color-hunter-deep);
+  }
+
+  a {
+    color: inherit;
+  }
+
+  ::selection {
+    background: var(--color-gold-soft);
+    color: var(--color-hunter-deep);
+  }
+}
+
+@layer components {
+  /* İnce altın ayraç motifi */
+  .ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.9rem;
+    color: var(--color-gold);
+  }
+  .ornament::before,
+  .ornament::after {
+    content: '';
+    height: 1px;
+    width: clamp(2rem, 12vw, 6rem);
+    background: linear-gradient(to var(--_dir, right), transparent, var(--color-gold));
+  }
+  .ornament::before {
+    --_dir: left;
+  }
+
+  .eyebrow {
+    font-family: var(--font-serif);
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    font-size: 0.72rem;
+    color: var(--color-gold);
+  }
+
+  .link-underline {
+    position: relative;
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 0;
+    background: currentColor;
+    transition: width 0.3s ease;
+  }
+  .link-underline:hover::after {
+    width: 100%;
+  }
+}

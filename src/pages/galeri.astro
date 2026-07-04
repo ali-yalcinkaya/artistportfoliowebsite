@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArtworkCard from '../components/ArtworkCard.astro';
+import Lightbox from '../components/Lightbox.astro';
+
+const all = (await getCollection('artworks')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout title="Eserler">
+  <section class="border-b border-line/70 bg-parchment-deep">
+    <div class="mx-auto max-w-6xl px-6 py-16 text-center">
+      <p class="eyebrow">Galeri</p>
+      <h1 class="mt-3 text-5xl">Eserler</h1>
+      <div class="ornament my-6"></div>
+      <p class="mx-auto max-w-xl text-ink-soft">
+        Tezhip ve minyatür sanatının seçkin örnekleri. Bir esere dokunarak
+        ayrıntılı olarak inceleyebilirsiniz.
+      </p>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 py-16">
+    <div class="[column-fill:_balance] gap-6 sm:columns-2 lg:columns-3">
+      {all.map((art, i) => (
+        <ArtworkCard
+          title={art.data.title}
+          image={art.data.image}
+          technique={art.data.technique}
+          calligrapher={art.data.calligrapher}
+          dimensions={art.data.dimensions}
+          description={art.data.description}
+          index={i}
+        />
+      ))}
+    </div>
+  </section>
+
+  <Lightbox />
+</BaseLayout>

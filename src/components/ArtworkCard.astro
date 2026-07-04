@@ -1,0 +1,45 @@
+---
+interface Props {
+  title: string;
+  image: string;
+  technique?: string;
+  calligrapher?: string;
+  dimensions?: string;
+  description?: string;
+  index?: number;
+}
+const { title, image, technique, calligrapher, dimensions, description, index = 0 } = Astro.props;
+---
+
+<figure
+  class="artwork-card group mb-6 break-inside-avoid overflow-hidden rounded-sm border border-line bg-white shadow-[0_1px_2px_rgba(42,38,34,0.06)] transition-shadow duration-300 hover:shadow-[0_10px_30px_-12px_rgba(31,61,47,0.35)]"
+  data-title={title}
+  data-image={image}
+  data-technique={technique}
+  data-calligrapher={calligrapher}
+  data-dimensions={dimensions}
+  data-description={description}
+>
+  <button type="button" class="js-open block w-full cursor-zoom-in text-left" aria-label={`${title} eserini büyüt`}>
+    <div class="overflow-hidden bg-parchment-deep">
+      <img
+        src={image}
+        alt={title}
+        loading={index < 4 ? 'eager' : 'lazy'}
+        decoding="async"
+        class="h-auto w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+      />
+    </div>
+  </button>
+  <figcaption class="px-5 pb-5 pt-4">
+    {technique && <span class="eyebrow">{technique}</span>}
+    <h3 class="mt-1 font-[family-name:var(--font-display)] text-xl text-hunter-deep">{title}</h3>
+    {description && (
+      <p class="mt-2 text-[0.95rem] leading-relaxed text-ink-soft line-clamp-4">{description}</p>
+    )}
+    <div class="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs uppercase tracking-[0.14em] text-gold">
+      {dimensions && <span>{dimensions}</span>}
+      {calligrapher && <span class="normal-case tracking-normal text-ink-soft/70">{calligrapher}</span>}
+    </div>
+  </figcaption>
+</figure>
