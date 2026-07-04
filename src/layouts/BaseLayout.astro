@@ -43,18 +43,41 @@ const fullTitle = title ? `${title} — ${site.name}` : `${site.name} · ${site.
       <slot />
     </main>
     <Footer />
-    <!-- Netlify Identity: /admin girişinden sonra doğru yönlendirme -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Netlify Identity: davet / şifre belirleme akışı ve /admin yönlendirmesi -->
+    <script is:inline src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script is:inline>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on('init', (user) => {
-          if (!user) {
-            window.netlifyIdentity.on('login', () => {
-              document.location.href = '/admin/';
-            });
+      (function () {
+        // Davet, şifre sıfırlama veya e-posta onay bağlantısıyla gelindi mi?
+        var hasAuthToken = /\b(invite_token|recovery_token|confirmation_token|email_change_token)=/.test(
+          window.location.hash || ''
+        );
+
+        function setup() {
+          var ni = window.netlifyIdentity;
+          if (!ni) return;
+
+          ni.on('init', function (user) {
+            if (!user) {
+              ni.on('login', function () {
+                document.location.href = '/admin/';
+              });
+            }
+            // Davet/şifre penceresini otomatik aç
+            if (hasAuthToken) ni.open();
+          });
+
+          // 'init' zaten tetiklenmiş olabilir; token varsa pencereyi garantiye al
+          if (hasAuthToken) {
+            try { ni.open(); } catch (e) {}
           }
-        });
-      }
+        }
+
+        if (window.netlifyIdentity) {
+          setup();
+        } else {
+          window.addEventListener('load', setup);
+        }
+      })();
     </script>
   </body>
 </html>
