@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArtworkCard from '../components/ArtworkCard.astro';
+import Lightbox from '../components/Lightbox.astro';
+import { site, bio } from '../data/site';
+
+const all = (await getCollection('artworks')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const featured = all.filter((a) => a.data.featured).slice(0, 6);
+const heroImage = '/images/artworks/eser-25.jpeg';
+---
+
+<BaseLayout>
+  <!-- Hero -->
+  <section class="relative overflow-hidden bg-hunter-deep text-parchment">
+    <div class="mx-auto grid max-w-6xl items-center gap-10 px-6 py-20 md:grid-cols-2 md:py-28">
+      <div>
+        <p class="eyebrow text-gold-soft">Tezhip &amp; Minyatür Sanatı</p>
+        <h1 class="mt-4 font-[family-name:var(--font-display)] text-5xl leading-[1.05] text-parchment sm:text-6xl">
+          {site.name}
+        </h1>
+        <p class="mt-6 max-w-md text-lg leading-relaxed text-parchment/85">
+          Klasik Türk bezeme sanatının inceliğiyle işlenmiş tezhip levhaları ve
+          İstanbul’un tarihî dokusunu yaşatan minyatürler.
+        </p>
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a
+            href="/galeri"
+            class="rounded-sm bg-gold px-7 py-3 text-sm uppercase tracking-[0.16em] text-hunter-deep transition-colors hover:bg-gold-soft"
+          >
+            Eserleri Keşfet
+          </a>
+          <a
+            href="/hakkimda"
+            class="rounded-sm border border-parchment/40 px-7 py-3 text-sm uppercase tracking-[0.16em] text-parchment transition-colors hover:bg-parchment/10"
+          >
+            Sanatçı Hakkında
+          </a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="absolute -inset-3 rounded-sm border border-gold/30"></div>
+        <img
+          src={heroImage}
+          alt="Mimar Sinan ve Tarihi Yarımada — minyatür"
+          class="relative w-full rounded-sm object-cover shadow-2xl"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Kısa tanıtım -->
+  <section class="mx-auto max-w-3xl px-6 py-20 text-center">
+    <div class="ornament mb-8"></div>
+    <p class="font-[family-name:var(--font-display)] text-2xl leading-relaxed text-hunter-deep sm:text-[1.7rem]">
+      “{bio[3].split('.')[0]}.”
+    </p>
+    <a href="/hakkimda" class="link-underline mt-8 inline-block text-sm uppercase tracking-[0.2em] text-gold">
+      Sanat Yolculuğunu Oku
+    </a>
+  </section>
+
+  <!-- Öne çıkan eserler -->
+  <section class="mx-auto max-w-6xl px-6 pb-8">
+    <div class="mb-10 text-center">
+      <p class="eyebrow">Seçilmiş Eserler</p>
+      <h2 class="mt-2 text-4xl">Öne Çıkanlar</h2>
+    </div>
+    <div class="[column-fill:_balance] gap-6 sm:columns-2 lg:columns-3">
+      {featured.map((art, i) => (
+        <ArtworkCard
+          title={art.data.title}
+          image={art.data.image}
+          technique={art.data.technique}
+          calligrapher={art.data.calligrapher}
+          dimensions={art.data.dimensions}
+          description={art.data.description}
+          index={i}
+        />
+      ))}
+    </div>
+    <div class="mt-8 text-center">
+      <a
+        href="/galeri"
+        class="inline-block rounded-sm border border-hunter/30 px-8 py-3 text-sm uppercase tracking-[0.16em] text-hunter transition-colors hover:bg-hunter hover:text-parchment"
+      >
+        Tüm Eserleri Gör
+      </a>
+    </div>
+  </section>
+
+  <Lightbox />
+</BaseLayout>

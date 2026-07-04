@@ -1,0 +1,80 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Yerel geliştirme için: `npx decap-server` çalıştırıp bu satırı açın.
+# local_backend: true
+
+media_folder: "public/images/artworks"
+public_folder: "/images/artworks"
+
+publish_mode: simple
+locale: "tr"
+
+site_url: https://barisfigenyalcinkaya.netlify.app
+display_url: https://barisfigenyalcinkaya.netlify.app
+logo_url: /favicon.svg
+
+collections:
+  - name: "artworks"
+    label: "Eserler"
+    label_singular: "Eser"
+    description: "Yeni eser eklemek, düzenlemek veya silmek için kullanın."
+    folder: "src/content/artworks"
+    create: true
+    delete: true
+    extension: "md"
+    format: "yaml-frontmatter"
+    slug: "{{order}}-{{slug}}"
+    identifier_field: "title"
+    summary: "{{order}} · {{title}} ({{technique}})"
+    sortable_fields: ["order", "title"]
+    fields:
+      - label: "Eser Adı"
+        name: "title"
+        widget: "string"
+        hint: "Örn. İnşirah Suresi"
+
+      - label: "Teknik"
+        name: "technique"
+        widget: "select"
+        options: ["Tezhip", "Minyatür", "Minyatür ve Tezhip"]
+        default: "Tezhip"
+
+      - label: "Eser Görseli"
+        name: "image"
+        widget: "image"
+        hint: "Dikey, yatay veya kare olabilir. Yüksek çözünürlüklü yükleyin."
+        media_library:
+          config:
+            max_file_size: 8000000
+
+      - label: "Eser Hakkında Bilgi"
+        name: "description"
+        widget: "text"
+        required: false
+        hint: "Eserin kısa açıklaması."
+
+      - label: "Ölçüler"
+        name: "dimensions"
+        widget: "string"
+        required: false
+        hint: "Örn. 30 x 30 cm"
+
+      - label: "Hat / Ebru Sanatçısı"
+        name: "calligrapher"
+        widget: "string"
+        required: false
+        hint: "Örn. Hat: Ceyhun Öydem (boş bırakılabilir)"
+
+      - label: "Sıralama"
+        name: "order"
+        widget: "number"
+        default: 100
+        value_type: "int"
+        hint: "Küçük sayı önce gösterilir."
+
+      - label: "Ana Sayfada Öne Çıkar"
+        name: "featured"
+        widget: "boolean"
+        default: false
